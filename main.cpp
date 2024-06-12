@@ -32,15 +32,23 @@ static void PrintCmdHelp()
 {
     std::cerr << "Version die inc_val, enc, cnf, solve times pure + total ausgibt" << std::endl
               << "Call im-app with 3+ arguments: ./im-app <kb_file> <measure> <method> <format> <cenc> <debug> <m>" << std::endl
-              << "'file' is a path to a  knowledge base file" << std::endl
-              << "'im' is the name of an inconsistency measure" << std::endl
-              << "'method' is the algorithmic approach, either 'sat', 'asp' or 'linsat'" << std::endl
-              << "possible 'im' values: contension, hs, maxdalal, sumdalal, "
-                 "hitdalal, forget" << std::endl
-			  << "format is 'dimacs' if the kb-file is in DIMACS Format or 'tweety' if it is in the Tweety format" << std::endl
-              << "'cenc' (optional) defines the cardinality encoding" << std::endl
-              << "possible 'cenc' values: sequential_counter, tree, binomial" << std::endl
-              << "'debug' (optional) enables additional debug outputs"
+              << "<file> is a path to a  knowledge base file" << std::endl
+              << "<measure> is the name of an inconsistency measure" << std::endl
+              << "<method> is the algorithmic approach, either 'sat', 'linsat', 'asp', 'maxsat', 'naivecpp' " << std::endl
+			  << "	Not all inconsistency measures have imolemented for each method:"
+              << "	List of implemented measures for each of the five modes:" << std::endl
+              << "	<method> = sat: contension, hs, hitdalal, maxdalal, sumdalal, forget" << std::endl
+			  << "	<method> = linsat: contension, hs, hitdalal, maxdalal, sumdalal, forget" << std::endl
+			  << "	<method> = asp: contension, hs, hitdalal, maxdalal, sumdalal, forget" << std::endl
+			  << "                  contension-ltl, drastic-ltl, mv, mv2, v3b, mv3, mv-mss, mv-mss2, p, p-2" << std::endl
+			  << "	<method> = maxsat: contension" << std::endl
+			  << "	<method> = naivecpp: forget" << std::endl
+			  << "Note that the arguments <kb_file> <measure> <method> are not optional and need to be specified" << std::endl
+			  << "<format> (optional) is 'dimacs' if the kb-file is in DIMACS Format or 'tweety' if it is in the Tweety format" << std::endl
+              << "<cenc> (optional) defines the cardinality encoding" << std::endl
+              << "	possible 'cenc' values: sequential_counter, tree, binomial" << std::endl
+              << "<debug> (optional) enables additional debug outputs"
+			  << "<m>: special value that only needs to be specified for measures contension-ltl and drastic-ltl"
               << std::endl;
 }
 
