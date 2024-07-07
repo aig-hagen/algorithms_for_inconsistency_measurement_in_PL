@@ -1,7 +1,7 @@
 #include "Utils.h"
 
 #include <algorithm>
-
+#include <stdexcept>
 #include "Formula.h"
 #include "Kb.h"
 
