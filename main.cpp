@@ -173,7 +173,7 @@ void handle_disjunction(Formula d, EvalMaxSAT *solver, std::map<std::string, int
             } else {
                 // solver->addClause({-dict[atom_name]});
                 clause.push_back(-dict[atom_name]);
-            }  
+            }
         }
         else{
             // add variable to dict:
@@ -222,7 +222,7 @@ void add_clauses_to_solver(Formula f, EvalMaxSAT *solver, std::map<std::string, 
                 max_val++;
             } else {
                 solver->addClause({-dict[atom_name]});
-            }  
+            }
         }
         else{
             // add variable to dict:
@@ -291,7 +291,7 @@ double get_inconsistency_value_MaxSAT(const Kb &k, ImSettings &config){
                 // add to solver:
                 solver->addWeightedClause({-max_val},1);
 
-                max_val++;               
+                max_val++;
             }
             else{
                 // add variable to dict:
@@ -339,7 +339,7 @@ int main(int argc, char *argv[])
     std::string measure = argv[2];
     std::transform(measure.begin(), measure.end(), measure.begin(), ::tolower);
     std::set<std::string> measures = {"contension", "hs", "hitdalal", "maxdalal", "sumdalal", "forget", "contension-ltl", "drastic-ltl",
-	                                  "mv", "mv2", "mv3", "mv3b", "mv-mss", "mv-mss2", "p", "p-2"};
+	                                  "mv", "mv2", "mv3", "mv3b", "mv-mss", "mv-mss2", "mv-mus", "p", "p-2", "p-mus"};
     if (measures.find(measure) == measures.end())
     {
         std::cerr << "Error: " << measure << " is not a valid inconsistency measure" << std::endl;
@@ -353,18 +353,18 @@ int main(int argc, char *argv[])
         std::cerr << "Error: " << method << " is not a valid algorithm approach, options are 'sat', 'asp' and 'linsat'" << std::endl;
         return -1;
     }
-	
+
 	// special case if given <measure> is an ltl measure because these measures require the additional argument <m>
 	if (measure == "contension-ltl" || measure == "drastic-ltl")
 	{
 	  if (argc != 8)
 	  {
 		std::cerr << "Error: " << measure << " needs additional parameter m" << std::endl;
-        return -1;  
+        return -1;
 	  }
-		
+
 	}
-	
+
 	// Default cardinality encoding is the sequential counter
     CardinalityEncoding enc = CardinalityEncoding::SEQUENTIAL_COUNTER;
     bool enable_debug_info = false;
@@ -400,12 +400,12 @@ int main(int argc, char *argv[])
     {
       std::cout << "Success: Using inconsistency measure: " << measure << std::endl;
     }
-	
-	//Step 2: Parsing the given kb-file depending on its format (either tweety or dimacs)	
+
+	//Step 2: Parsing the given kb-file depending on its format (either tweety or dimacs)
     std::string file = argv[1];
     Parser p = Parser();
 	Kb k = Kb();
-	
+
 	if(argc > 4) // in case the format of the kb-file has been explicitly specified
     {
       std::string format = argv[4];
@@ -415,38 +415,38 @@ int main(int argc, char *argv[])
 	  }
 	  else if(format == "dimacs")
 	  {
-		k.Add(p.ParseKbFromDIMACSFile(file)); 
+		k.Add(p.ParseKbFromDIMACSFile(file));
 	  }
 	  else
 	  {
 		std::cerr << "Error: " << format << "is not a valid knowledge base format (choose either tweety or dimacs)" << std::endl;
-        return -1;  
+        return -1;
 	  }
     }
     else // default format is Tweety Format for knowledge bases
     {
 	  k.Add(p.ParseKbFromFile(file));
 	}
-	
+
     if (enable_debug_info)
     {
       std::cout << "Success: Parsed KB: " << file << std::endl;
       std::cout << k << std::endl;
     }
-	
+
 	//Step 3: Preparing the configuration
     ImSettings config;
     config.measure_name = measure;
     config.offset = 0;
     config.is_in_cnf = false;
     config.cardinality_encoding = enc;
-	
+
 	//Step 4: Computing the inconsistency value
     double result {};
     if (method == "asp")
     {
         result = get_inconsistency_value(k, config);
-		
+
     }
     else if (method == "sat")
     {
@@ -464,7 +464,7 @@ int main(int argc, char *argv[])
     {
         result = get_inconsistency_naive_value(k, config);
     }
-	
+
 	//Step 5: Printing the result
     std::string result_string = std::to_string(result);
     if (result == -1)
@@ -545,7 +545,7 @@ int main(int argc, char *argv[])
     // print result_string that has the following format:
     // "<inc_value>-<num_solver_calls>-<avg_encoding_time>-<avg_cnf_transform_time>-<avg_solver_time>"
 	*/
-	
+
     std::cout.precision(17);
     std::cout << result_string << "_"
               << time_msrs::num_solver_calls << "_"

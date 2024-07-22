@@ -24,7 +24,7 @@ std::string add_cs_rules_iterative_MSS_p(){
 
     // count number of elements in cs:
     program += NUM_ELEMENTS_IN_CS + "(X):-X=#count{F:" + IN_CS + "(F)}.";
-    
+
 
     return program;
 }
@@ -51,7 +51,28 @@ std::string add_cs_rules_iterative_MSS_p_2(){
 
     // count number of elements in cs:
     program += NUM_ELEMENTS_IN_CS + "(X):-X=#count{F:" + IN_CS + "(F)}.";
-    
+
+
+    return program;
+}
+
+std::string add_cs_rules_iterative_p(){
+    std::string program = "";
+
+    // create candidate set:
+    program += "1{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
+
+    // ensure that query atom is contained in the cs:
+    // atomInCs(A) :- atomInFormula(A,F), inCs(F).
+    program += ATOM_IN_CS + "(A):-" + ATOM_IN_FORMULA + "(A,F)," + IN_CS + "(F).";
+
+    // count number of elements in cs:
+    // numElementsInCs(X) :- X = #count{F: inCs(F)}.
+    program += NUM_ELEMENTS_IN_CS + "(X):-X=#count{F:" + IN_CS + "(F)}.";
+
+    // number of elements per subset:
+    // numElementsInSubset(X) :- numElementsInCs(Y), X = Y-1.
+    program += NUM_ELEMENTS_IN_SUBSET + "(X):-" + NUM_ELEMENTS_IN_CS + "(Y),X=Y-1.";
 
     return program;
 }
@@ -70,7 +91,7 @@ double problematic_measure_iterative_MSS(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -138,7 +159,7 @@ double problematic_measure_iterative_MSS(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // also check which formulas are included in the MIS found
             std::set<std::string> formulas_in_curr_MCS = getFormulasInMCS(curr_program);
@@ -161,7 +182,7 @@ double problematic_measure_iterative_MSS(Kb& kb){
         }
 
         return (double)formulas_in_MCS.size();
-    }  
+    }
 }
 
 // p-2
@@ -175,7 +196,7 @@ double problematic_measure_iterative_MSS_2(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -253,7 +274,7 @@ double problematic_measure_iterative_MSS_2(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // also check which formulas are included in the MIS found
             std::set<std::string> formulas_in_curr_MCS = getFormulasInMCS(curr_program);
@@ -276,5 +297,5 @@ double problematic_measure_iterative_MSS_2(Kb& kb){
         }
 
         return (double)formulas_in_MCS.size();
-    }  
+    }
 }

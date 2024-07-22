@@ -8,6 +8,7 @@
 #include "LTLMeasuresASP.h"
 #include "MvIterativeASP.h"
 #include "ProblematicIterativeASP.h"
+#include "mvpMUSBased.h"
 #include <iostream>
 
 using namespace constants;
@@ -70,6 +71,10 @@ double get_inconsistency_value(Kb& k, ImSettings config)
     {
         return mv_measure_iterative_MSS_2(k);
     }
+    else if (config.measure_name == "mv-mus")
+    {
+        return mv_measure_MUS_based(k);
+    }
     else if (config.measure_name == "p")
     {
         return problematic_measure_iterative_MSS(k);
@@ -77,6 +82,10 @@ double get_inconsistency_value(Kb& k, ImSettings config)
     else if (config.measure_name == "p-2")
     {
         return problematic_measure_iterative_MSS_2(k);
+    }
+    else if (config.measure_name == "p-mus")
+    {
+        return p_measure_MUS_based(k);
     }
     else //this should not happen
     {
@@ -93,7 +102,7 @@ std::string add_atom_rules(Kb& kb){
             [](unsigned char c){ return std::tolower(c); });
         std::string atom_rule = ATOM + "(" + atom + ").";
         atom_rules += atom_rule;
-    } 
+    }
     return atom_rules;
 }
 
@@ -119,7 +128,7 @@ bool answerSetExists(std::string& program){
     else{
         return false;
     }
-    
+
 }
 
 std::set<std::string> getNumberOfAtomsInMUS(std::string& program){
@@ -152,7 +161,7 @@ std::set<std::string> getNumberOfAtomsInMUS(std::string& program){
     else{
         return atom_list;
     }
-    
+
 }
 
 std::set<std::string> getAtomsInMCS(std::string& program){
@@ -185,7 +194,7 @@ std::set<std::string> getAtomsInMCS(std::string& program){
     else{
         return atom_list;
     }
-    
+
 }
 
 std::set<std::string> getFormulasInMCS(std::string& program){
@@ -218,7 +227,41 @@ std::set<std::string> getFormulasInMCS(std::string& program){
     else{
         return atom_list;
     }
-    
+
+}
+
+std::set<std::string> getFormulasInMUS(std::string& program){
+    Clingo::Logger logger = [](Clingo::WarningCode, char const *message) {
+            std::cerr << message << std::endl;
+        };
+    Clingo::StringSpan string_span{"--opt-mode=opt"};
+    Clingo::Control control{string_span, logger, 20};
+    const char * program_char_array = program.c_str();
+
+    control.add("base", {}, program_char_array);
+    control.ground({{"base", {}}});
+
+    // compute models:
+    Clingo::SolveHandle sh = control.solve();
+    Clingo::Model m = sh.model();
+
+    std::set<std::string> atom_list;
+
+    if(m){
+        for (auto atom : m.symbols()){
+            if (atom.match("inCs",1)){
+                for(auto arg : atom.arguments()){
+                    atom_list.insert(arg.name());
+                    // std::cout << "Found " << arg.name() << std::endl;
+                }
+            }
+        }
+        return atom_list;
+    }
+    else{
+        return atom_list;
+    }
+
 }
 
 int compute_optimum(std::string& program){
@@ -308,7 +351,7 @@ std::string add_conjunction_rules_dalal(){
     conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + "):-" + CONJUNCTION + "(X)," + INTERPRETATION + "(Y),N{" + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(Z,Y," + TRUTH_VALUE_T + "):" + CONJUNCT_OF + "(Z,X)}N," + NUM_CONJUNCTS + "(X,N).";
 
     // false:
-    conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + ")."; 
+    conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + ").";
 
     return conjunction_rules;
 }

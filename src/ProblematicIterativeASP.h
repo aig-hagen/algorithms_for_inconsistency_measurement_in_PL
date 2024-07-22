@@ -34,6 +34,7 @@
 
 std::string add_cs_rules_iterative_MSS_p();
 std::string add_cs_rules_iterative_MSS_p_2();
+std::string add_cs_rules_iterative_p();
 
 double problematic_measure_iterative_MSS(Kb& kb);
 double problematic_measure_iterative_MSS_2(Kb& kb);

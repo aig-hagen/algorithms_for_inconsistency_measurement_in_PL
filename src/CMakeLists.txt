@@ -46,6 +46,8 @@ target_sources(im_app
 	  InconsistencyMeasureNaiveSAT.cpp
 	  ForgettingBasedNaiveSAT.h
 	  ForgettingBasedNaiveSAT.cpp
+      mvpMUSBased.h
+      mvpMUSBased.cpp
 )
 
 target_include_directories(im_app PUBLIC ${CMAKE_CURRENT_LIST_DIR})

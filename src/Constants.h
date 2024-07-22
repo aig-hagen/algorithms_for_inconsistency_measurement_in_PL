@@ -39,7 +39,7 @@ namespace constants {
     static const std::string DALAL = "d";
     static const std::string DALAL_MAX = "dMax";
     static const std::string DALAL_SUM = "dSum";
-	
+
 	//BEGIN: Constants used in LTL measures specifically
 	static const std::string IS_NEXT = "next";
     static const std::string IS_UNTIL = "until";
@@ -56,9 +56,10 @@ namespace constants {
     static const std::string ATOM_IN_FORMULA_LTL = "aInF";
     static const std::string INTERSECTION_SIZE = "interSize";
     static const std::string TRACE = "trace";
-	//END: Constants used in LTL measures 
-	
+	//END: Constants used in LTL measures
+
 	//BEGIN: Constants used for mv and problematic measures specifically
+    static const std::string ATOM_IN_FORMULA = "atomInFormula";
 	static const std::string ATOM_IN_FORMULA_MV = "atomInFormula";
     static const std::string NUM_KB_ELEMENTS = "numKbElements";
     static const std::string QUERY_ATOM = "queryAtom";
@@ -96,7 +97,7 @@ namespace constants {
     static const std::string ATOM_IN_SUPERSET = "atomInSuperset";
 
     static const std::string QUERY_FORMULA = "queryF";
-	
+
 	static const std::string TRUTH_VALUE_PREDICATE_CS = "truthValueCS";
     static const std::string TRUTH_VALUE_PREDICATE_SET = "truthValueSet";
     // static const std::string FORMULA_IN_REMAINDER = "fInRemainder";

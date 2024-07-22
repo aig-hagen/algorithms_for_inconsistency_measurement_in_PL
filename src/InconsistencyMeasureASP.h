@@ -13,6 +13,7 @@ int compute_optimum_with_inf(std::string& program);
 bool answerSetExists(std::string& program);
 std::set<std::string> getNumberOfAtomsInMUS(std::string& program);
 std::set<std::string> getAtomsInMCS(std::string& program);
+std::set<std::string> getFormulasInMUS(std::string& program);
 std::set<std::string> getFormulasInMCS(std::string& program);
 //END: functions used in MvIterativeASP.cpp
 
