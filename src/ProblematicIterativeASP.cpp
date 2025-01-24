@@ -9,7 +9,7 @@ std::string add_cs_rules_iterative_MSS_p(){
     std::string program = "";
 
     // create candidate set:
-    program += "1{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
+    program += "{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
 
     // Auxiliary predicate that tells whether a formula is NOT in the CS:
     // not_inCs(F) :- kbMember(F), not inCs(F).
@@ -33,7 +33,7 @@ std::string add_cs_rules_iterative_MSS_p_2(){
     std::string program = "";
 
     // create candidate set:
-    program += "1{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
+    program += "{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
 
     // Auxiliary predicate that tells whether a formula is NOT in the CS:
     // not_inCs(F) :- kbMember(F), not inCs(F).

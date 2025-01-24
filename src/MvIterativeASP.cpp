@@ -145,7 +145,7 @@ void pl_to_ASP_mv(Formula& formula, std::string formula_name, std::string& rules
     }
 
     if(formula.IsTautology()){
-        rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(" + formula_name + ",1.." + std::to_string(num_formulas) + "," + TRUTH_VALUE_T + ")." ;         
+        rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(" + formula_name + ",1.." + std::to_string(num_formulas) + "," + TRUTH_VALUE_T + ")." ;
         return;
     }
 
@@ -165,7 +165,7 @@ std::string add_conjunction_rules_mv(){
     conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + "):-" + CONJUNCTION + "(X)," + INTERPRETATION + "(Y),N{" + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(Z,Y," + TRUTH_VALUE_T + "):" + CONJUNCT_OF + "(Z,X)}N," + NUM_CONJUNCTS + "(X,N).";
 
     // false:
-    // conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + ")."; 
+    // conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + ").";
     conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION + "(Y),1{" + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(Z,Y," + TRUTH_VALUE_F + "):" + CONJUNCT_OF + "(Z,X)}."; // N," + NUM_CONJUNCTS + "(X,N).";
 
     return conjunction_rules;
@@ -206,7 +206,7 @@ std::string add_conjunction_rules_mv_MSS(){
 
     // ---- for supersets: ----
     conjunction_rules += TRUTH_VALUE_PREDICATE_SET + "(X,Y," + TRUTH_VALUE_T + "):-" + CONJUNCTION + "(X)," + IS_SUPERSET + "(Y),N{" + TRUTH_VALUE_PREDICATE_SET + "(Z,Y," + TRUTH_VALUE_T + "):" + CONJUNCT_OF + "(Z,X)}N," + NUM_CONJUNCTS + "(X,N).";
-    conjunction_rules += TRUTH_VALUE_PREDICATE_SET + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + IS_SUPERSET + "(Y),1{" + TRUTH_VALUE_PREDICATE_SET + "(Z,Y," + TRUTH_VALUE_F + "):" + CONJUNCT_OF + "(Z,X)}."; 
+    conjunction_rules += TRUTH_VALUE_PREDICATE_SET + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + IS_SUPERSET + "(Y),1{" + TRUTH_VALUE_PREDICATE_SET + "(Z,Y," + TRUTH_VALUE_F + "):" + CONJUNCT_OF + "(Z,X)}.";
 
     return conjunction_rules;
 }
@@ -219,11 +219,11 @@ std::string add_disjunction_rules_mv_MSS(){
     disjunction_rules += TRUTH_VALUE_PREDICATE_CS + "(X," + TRUTH_VALUE_F + "):-" + DISJUNCTION + "(X),N{" + TRUTH_VALUE_PREDICATE_CS + "(Z," + TRUTH_VALUE_F + "):" + DISJUNCT_OF + "(Z,X)}N," + NUM_DISJUNCTS + "(X,N).";
     // true:
     // disjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + "):-" + DISJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + ").";
-    disjunction_rules += TRUTH_VALUE_PREDICATE_CS + "(X," + TRUTH_VALUE_T + "):-" + DISJUNCTION + "(X),1{" + TRUTH_VALUE_PREDICATE_CS + "(Z," + TRUTH_VALUE_T + "):" + DISJUNCT_OF + "(Z,X)}."; 
+    disjunction_rules += TRUTH_VALUE_PREDICATE_CS + "(X," + TRUTH_VALUE_T + "):-" + DISJUNCTION + "(X),1{" + TRUTH_VALUE_PREDICATE_CS + "(Z," + TRUTH_VALUE_T + "):" + DISJUNCT_OF + "(Z,X)}.";
 
     // ---- for supersets: ----
     disjunction_rules += TRUTH_VALUE_PREDICATE_SET + "(X,Y," + TRUTH_VALUE_F + "):-" + DISJUNCTION + "(X)," + IS_SUPERSET + "(Y),N{" + TRUTH_VALUE_PREDICATE_SET + "(Z,Y," + TRUTH_VALUE_F + "):" + DISJUNCT_OF + "(Z,X)}N," + NUM_DISJUNCTS + "(X,N).";
-    disjunction_rules += TRUTH_VALUE_PREDICATE_SET + "(X,Y," + TRUTH_VALUE_T + "):-" + DISJUNCTION + "(X)," + IS_SUPERSET + "(Y),1{" + TRUTH_VALUE_PREDICATE_SET + "(Z,Y," + TRUTH_VALUE_T + "):" + DISJUNCT_OF + "(Z,X)}."; 
+    disjunction_rules += TRUTH_VALUE_PREDICATE_SET + "(X,Y," + TRUTH_VALUE_T + "):-" + DISJUNCTION + "(X)," + IS_SUPERSET + "(Y),1{" + TRUTH_VALUE_PREDICATE_SET + "(Z,Y," + TRUTH_VALUE_T + "):" + DISJUNCT_OF + "(Z,X)}.";
 
     return disjunction_rules;
 }
@@ -253,7 +253,7 @@ std::string add_conjunction_rules_mv_opt(){
     conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y,C," + TRUTH_VALUE_T + "):-" + CONJUNCTION + "(X)," + INTERPRETATION_OF + "(Y,C),N{" + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(Z,Y,C," + TRUTH_VALUE_T + "):" + CONJUNCT_OF + "(Z,X)}N," + NUM_CONJUNCTS + "(X,N).";
 
     // false:
-    // conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + ")."; 
+    // conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION +"(Y),not " + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y," + TRUTH_VALUE_T + ").";
     conjunction_rules += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(X,Y,C," + TRUTH_VALUE_F + "):-" + CONJUNCTION + "(X)," + INTERPRETATION_OF + "(Y,C),1{" + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(Z,Y,C," + TRUTH_VALUE_F + "):" + CONJUNCT_OF + "(Z,X)}."; // N," + NUM_CONJUNCTS + "(X,N).";
 
     return conjunction_rules;
@@ -349,7 +349,7 @@ std::string add_cs_rules_iterative_MSS(){
     std::string program = "";
 
     // create candidate set:
-    program += "1{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
+    program += "{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
 
     // Auxiliary predicate that tells whether a formula is NOT in the CS:
     // not_inCs(F) :- kbMember(F), not inCs(F).
@@ -369,7 +369,7 @@ std::string add_cs_rules_iterative_MSS(){
     // count number of elements in cs:
     // numElementsInCs(X) :- X = #count{F: inCs(F)}.
     program += NUM_ELEMENTS_IN_CS + "(X):-X=#count{F:" + IN_CS + "(F)}.";
-    
+
 
     return program;
 }
@@ -378,7 +378,7 @@ std::string add_cs_rules_iterative_MSS_2(){
     std::string program = "";
 
     // create candidate set:
-    program += "1{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
+    program += "{" + IN_CS + "(X):" + KB_MEMBER + "(X)}."; // "N:-" + NUM_KB_ELEMENTS + "(N).";
 
     // Auxiliary predicate that tells whether a formula is NOT in the CS:
     // not_inCs(F) :- kbMember(F), not inCs(F).
@@ -400,7 +400,7 @@ std::string add_cs_rules_iterative_MSS_2(){
     // count number of elements in cs:
     // numElementsInCs(X) :- X = #count{F: inCs(F)}.
     program += NUM_ELEMENTS_IN_CS + "(X):-X=#count{F:" + IN_CS + "(F)}.";
-    
+
 
     return program;
 }
@@ -430,7 +430,7 @@ std::string add_cs_superset_rules_iterative(){
 
     // Define supersets:
     // isSuperset(1..X) :- numSupersets(X), X>0.
-    program += IS_SUPERSET + "(1..X):-" + NUM_SUPERSETS + "(X),X>0."; 
+    program += IS_SUPERSET + "(1..X):-" + NUM_SUPERSETS + "(X),X>0.";
 
     // Every formula that is not in the CS must be added to the CS once to form a superset:
     // 1{additionalElement(F,S): not_inCs(F)}1 :- isSuperset(S).
@@ -462,7 +462,7 @@ std::string add_subset_sat_rules_iterative(){
     // define subsets:
     // isSubset(1..X) :- numElementsInCs(X).
     // Y{inSubset(F,S): inCs(F)}Y :- isSubset(S), numElementsInSubset(Y).
-    program += IS_SUBSET + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1."; 
+    program += IS_SUBSET + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1.";
     program += "Y{" + IN_SUBSET + "(F,S):" + IN_CS + "(F)}Y:-" + IS_SUBSET + "(S)," + NUM_ELEMENTS_IN_SUBSET + "(Y).";
 
     // ensure that all subsets are different:
@@ -474,7 +474,7 @@ std::string add_subset_sat_rules_iterative(){
 
     // define |cs| interpretations:
     // interpretation(1..X) :- numElementsInCs(X).
-    program += INTERPRETATION + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1."; 
+    program += INTERPRETATION + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1.";
     // guess atom evaluations:
     // 1{truthValueInt(A,I,T) : tv(T)}1 :- atom(A), interpretation(I), I != u.
     program += "1{" + TRUTH_VALUE_PREDICATE_INTERPRETATION + "(A,I,T):tv(T)}1:-" + ATOM_IN_CS + "(A)," + INTERPRETATION + "(I),I!=u.";
@@ -550,7 +550,7 @@ double mv_measure_iterative(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -608,7 +608,7 @@ double mv_measure_iterative(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // int opt = compute_optimum_with_inf(program);
             if(answerSetExists(curr_program)){
@@ -621,11 +621,11 @@ double mv_measure_iterative(Kb& kb){
             time_msrs::solver_times_total.push_back(solver_interval);
 
         }
-        
+
         // std::cout << num_atoms_in_MIS << std::endl;
 
         return (double)num_atoms_in_MIS / (double)signature.size();
-    }  
+    }
 }
 
 // mv2
@@ -640,7 +640,7 @@ double mv_measure_optimize(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -701,11 +701,11 @@ double mv_measure_optimize(Kb& kb){
 
         // create candidate sets:
         // 1{inCs(F,C): kbElement(F)} :- isCs(C).
-        program += "1{" + IN_CS + "(F,C):" + KB_MEMBER + "(F)}:-" + IS_CS + "(C)."; 
+        program += "1{" + IN_CS + "(F,C):" + KB_MEMBER + "(F)}:-" + IS_CS + "(C).";
 
         // % ensure that query atom is contained in the cs:
-        // atomInCs(A,C) :- atomInFormula(A,F), inCs(F,C). 
-        // :- not atomInCs(A,C), queryAtomOfSet(A,C). 
+        // atomInCs(A,C) :- atomInFormula(A,F), inCs(F,C).
+        // :- not atomInCs(A,C), queryAtomOfSet(A,C).
         program += ATOM_IN_CS + "(A,C):-" + ATOM_IN_FORMULA_MV + "(A,F)," + IN_CS + "(F,C).";
         program += ":-not " + ATOM_IN_CS + "(A,C)," + QUERY_ATOM_OF_SET + "(A,C).";
 
@@ -720,18 +720,18 @@ double mv_measure_optimize(Kb& kb){
         // define subsets:
         // subsetOfSet(1..X,C) :- isCs(C), numElementsInCs(C,X), X>1.
         // Y{inSubsetOfSet(F,S,C): inCs(F,C)}Y :- subsetOfSet(S,C), numElementsInSubset(S,C,Y).
-        program += SUBSET_OF_SET + "(1..X,C):-" + IS_CS + "(C)," + NUM_ELEMENTS_IN_CS + "(C,X),X>1."; 
+        program += SUBSET_OF_SET + "(1..X,C):-" + IS_CS + "(C)," + NUM_ELEMENTS_IN_CS + "(C,X),X>1.";
         program += "Y{" + IN_SUBSET_OF_SET + "(F,S,C):" + IN_CS + "(F,C)}Y:-" + SUBSET_OF_SET + "(S,C)," + NUM_ELEMENTS_IN_SUBSET + "(S,C,Y).";
 
         // ensure that all subsets are different wrt. a cs:
-        // subsetEq(S1,S2,C) :- subsetOfSet(S1,C), subsetOfSet(S2,C), S1 != S2, X = #count{F: inSubsetOfSet(F,S1,C), inSubsetOfSet(F,S2,C)}, 
+        // subsetEq(S1,S2,C) :- subsetOfSet(S1,C), subsetOfSet(S2,C), S1 != S2, X = #count{F: inSubsetOfSet(F,S1,C), inSubsetOfSet(F,S2,C)},
         //      numElementsInSubset(S1,C,Y), X == Y.
         program += SUBSET_EQ + "(S1,S2,C):-" + SUBSET_OF_SET + "(S1,C)," + SUBSET_OF_SET + "(S2,C),S1!=S2,X=#count{F:" + IN_SUBSET_OF_SET + "(F,S1,C)," + IN_SUBSET_OF_SET + "(F,S2,C)}," + NUM_ELEMENTS_IN_SUBSET + "(S1,C,Y),X==Y.";
         program += ":-" + SUBSET_EQ + "(S1,S2,C).";
 
         // define |cs| interpretations per cs:
         // interpretationOf(1..X,C) :- isCs(C), numElementsInCs(C,X), X>1..
-        program += INTERPRETATION_OF + "(1..X,C):-" + IS_CS + "(C)," + NUM_ELEMENTS_IN_CS + "(C,X),X>1."; 
+        program += INTERPRETATION_OF + "(1..X,C):-" + IS_CS + "(C)," + NUM_ELEMENTS_IN_CS + "(C,X),X>1.";
 
         // guess atom evaluations:
         // 1{truthValueInt(A,I,C,T) : tv(T)}1 :- atom(A), interpretationOf(I,C), I != u.
@@ -758,7 +758,7 @@ double mv_measure_optimize(Kb& kb){
         // :- not isUnsat.
         // program += ":-not " + IS_UNSAT + ".";
 
-        // truthValueInt(A,u,C,t) :- isUnsat(C), atomInCs(A,C). 
+        // truthValueInt(A,u,C,t) :- isUnsat(C), atomInCs(A,C).
         // truthValueInt(A,u,C,f) :- isUnsat(C), atomInCs(A,C).
         program += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(A,u,C," + TRUTH_VALUE_T + "):-" + IS_UNSAT + "(C)," + ATOM_IN_CS + "(A,C).";
         // program += TRUTH_VALUE_PREDICATE_INTERPRETATION + "(A,u," + TRUTH_VALUE_F + "):-" + IS_UNSAT + "," + ATOM + "(A)," + NUM_ELEMENTS_IN_CS + "(X),X>1.";
@@ -801,7 +801,7 @@ double mv_measure_optimize(Kb& kb){
         time_msrs::num_solver_calls++;
         // Measure the time clingo takes to solve the program
         auto solver_start = std::chrono::steady_clock::now();
-        
+
         // let Clingo solve the problem; retrieve optimum
         int opt = compute_optimum(program) * (-1);
 
@@ -809,12 +809,12 @@ double mv_measure_optimize(Kb& kb){
         double solver_interval = double (std::chrono::duration_cast<std::chrono::microseconds>(solver_end - solver_start).count())
                         / double (1000000.0);
         time_msrs::solver_times_total.push_back(solver_interval);
-        
+
         // std::cout << num_atoms_in_MIS << std::endl;
 
         // return (double)num_atoms_in_MIS / (double)signature.size();
         return (double)opt / (double)signature.size();
-    }  
+    }
 }
 
 // mv3b
@@ -827,7 +827,7 @@ double mv_measure_iterative_2(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -863,20 +863,20 @@ double mv_measure_iterative_2(Kb& kb){
 
         // define subsets:
         // isSubset(1..X) :- numElementsInCs(X).
-        program += IS_SUBSET + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1."; 
+        program += IS_SUBSET + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1.";
         // 1{remove(F,S): inCs(F)}1 :- isSubset(S).
         program += "1{" + REMOVE_F + "(F,S):" + IN_CS + "(F)}1:-" + IS_SUBSET + "(S).";
 
         // ensure that all subsets are different:
         // 	-> x = number of formulas that are the same
-        // removeEq(S1,S2) :- isSubset(S1), isSubset(S2), S1 != S2, remove(F1,S1), remove(F2,S2), F1 == F2. 
+        // removeEq(S1,S2) :- isSubset(S1), isSubset(S2), S1 != S2, remove(F1,S1), remove(F2,S2), F1 == F2.
         // :- removeEq(S1,S2).
         program += REMOVE_EQ + "(S1,S2):-" + IS_SUBSET + "(S1)," + IS_SUBSET + "(S2),S1!=S2," + REMOVE_F + "(F1,S1)," + REMOVE_F + "(F2,S2),F1==F2." ;
         program += ":-" + REMOVE_EQ + "(S1,S2).";
 
         // define |cs| interpretations:
         // interpretation(1..X) :- numElementsInCs(X).
-        program += INTERPRETATION + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1."; 
+        program += INTERPRETATION + "(1..X):-" + NUM_ELEMENTS_IN_CS + "(X),X>1.";
 
         // guess atom evaluations:
         // 1{truthValueInt(A,I,T): tv(T)}1 :- atomInCs(A), interpretation(I), I != u.
@@ -910,7 +910,7 @@ double mv_measure_iterative_2(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // int opt = compute_optimum_with_inf(program);
             if(answerSetExists(curr_program)){
@@ -923,11 +923,11 @@ double mv_measure_iterative_2(Kb& kb){
             time_msrs::solver_times_total.push_back(solver_interval);
 
         }
-        
+
         // std::cout << num_atoms_in_MIS << std::endl;
 
         return (double)num_atoms_in_MIS / (double)signature.size();
-    }  
+    }
 }
 
 // mv3
@@ -940,7 +940,7 @@ double mv_measure_iterative_3(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -1003,7 +1003,7 @@ double mv_measure_iterative_3(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // also check which atoms are included in the MIS found
             std::set<std::string> atoms_in_curr_MUS = getNumberOfAtomsInMUS(curr_program);
@@ -1020,7 +1020,7 @@ double mv_measure_iterative_3(Kb& kb){
         }
 
         return (double)atoms_in_MUS.size() / (double)signature.size();
-    }  
+    }
 }
 
 // mv-mss
@@ -1036,7 +1036,7 @@ double mv_measure_iterative_MSS(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -1104,7 +1104,7 @@ double mv_measure_iterative_MSS(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // also check which atoms are included in the MIS found
             std::set<std::string> atoms_in_curr_MCS = getAtomsInMCS(curr_program);
@@ -1121,7 +1121,7 @@ double mv_measure_iterative_MSS(Kb& kb){
         }
 
         return (double)atoms_in_MCS.size() / (double)signature.size();
-    }  
+    }
 }
 
 // mv-mss-2
@@ -1137,7 +1137,7 @@ double mv_measure_iterative_MSS_2(Kb& kb){
     auto encoding_start = std::chrono::steady_clock::now();
     // Check if KB is empty:
     if(numFormulas == 0){
-        // std::cout << "Inconsistency value: 0" << std::endl; 
+        // std::cout << "Inconsistency value: 0" << std::endl;
         return 0;
     }
 
@@ -1226,7 +1226,7 @@ double mv_measure_iterative_MSS_2(Kb& kb){
             time_msrs::num_solver_calls++;
             // Measure the time clingo takes to solve the program
             auto solver_start = std::chrono::steady_clock::now();
-            
+
             // let Clingo solve the problem; check if an answer set exists:
             // also check which atoms are included in the MIS found
             std::set<std::string> atoms_in_curr_MCS = getAtomsInMCS(curr_program);
@@ -1249,11 +1249,11 @@ double mv_measure_iterative_MSS_2(Kb& kb){
         }
 
         return (double)atoms_in_MCS.size() / (double)signature.size();
-    }  
+    }
 }
 
 // -----------------------------------------------------------------------------------------
-// This does not work! 
+// This does not work!
 // double mv_measure_iterative_TEST(Kb& kb){
 
 //     // In this version, the procedure uses potentially fewer iterations by checking which (other) atoms are in the MUSes
@@ -1263,7 +1263,7 @@ double mv_measure_iterative_MSS_2(Kb& kb){
 //     auto encoding_start = std::chrono::steady_clock::now();
 //     // Check if KB is empty:
 //     if(numFormulas == 0){
-//         // std::cout << "Inconsistency value: 0" << std::endl; 
+//         // std::cout << "Inconsistency value: 0" << std::endl;
 //         return 0;
 //     }
 
@@ -1330,7 +1330,7 @@ double mv_measure_iterative_MSS_2(Kb& kb){
 //                 time_msrs::num_solver_calls++;
 //                 // Measure the time clingo takes to solve the program
 //                 auto solver_start = std::chrono::steady_clock::now();
-                
+
 //                 // let Clingo solve the problem; check if an answer set exists:
 //                 // also check which atoms are included in the MIS found
 //                 std::set<std::string> atoms_in_curr_MUS = getNumberOfAtomsInMUS(curr_program);
@@ -1392,7 +1392,7 @@ double mv_measure_iterative_MSS_2(Kb& kb){
 //                 time_msrs::num_solver_calls++;
 //                 // Measure the time clingo takes to solve the program
 //                 auto solver_start = std::chrono::steady_clock::now();
-                
+
 //                 // let Clingo solve the problem; check if an answer set exists:
 //                 // also check which atoms are included in the MIS found
 //                 std::set<std::string> atoms_in_curr_MUS = getNumberOfAtomsInMUS(curr_program);
@@ -1433,5 +1433,5 @@ double mv_measure_iterative_MSS_2(Kb& kb){
 //         std::cout << "atoms_in_MUS size: " << atoms_in_MUS.size() << "\nKB signature size: " << signature.size() << std::endl;
 
 //         return (double)atoms_in_MUS.size() / (double)signature.size();
-//     }  
+//     }
 // }
